@@ -5,3 +5,4 @@
 [node name="Main" type="Node2D" unique_id=1980284310]
 
 [node name="Player" parent="." unique_id=1917956507 instance=ExtResource("1_etubs")]
+position = Vector2(646, 343)
