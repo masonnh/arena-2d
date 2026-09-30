@@ -2,20 +2,33 @@ extends CharacterBody2D
 
 @onready var anim_spr: AnimatedSprite2D = $AnimatedSprite2D as AnimatedSprite2D
 
+# Player Data
 const SPEED = 300.0
-
 var direction: Vector2 = Vector2.DOWN
-var previous_direction: Vector2
+
+# Player State
+var attacking := false
+
 
 func _physics_process(delta: float) -> void:
+	if attacking:
+		return
+	
+	if Input.is_action_pressed("attack"):
+		_attack()
+	
 	_handle_movement()
 	_handle_animation()
 	move_and_slide() # move and slide handles delta, no need to account for it in velocity calcs
 
 
+## Handles player attacking state
+func _attack() -> void:
+	attacking = true
+
+
 ## Reads player input and updates velocity to move player
 func _handle_movement() -> void:
-	previous_direction = direction
 	direction = Input.get_vector("left", "right", "up", "down")
 	
 	if direction == Vector2.ZERO:
@@ -24,19 +37,36 @@ func _handle_movement() -> void:
 		velocity = direction * SPEED
 
 
-## Automatically plays animation based on player movement
+## Automatically plays animation based on player movement and state
 func _handle_animation() -> void:
+	# Get the previous direction str
+	var prev_dir_str: String = anim_spr.animation.get_slice("_", anim_spr.animation.get_slice_count("_") - 1)
+	
 	# Determine the prefix
 	var prefix: String = "idle_"
 	if velocity != Vector2.ZERO:
 		prefix = "walk_"
 	
+	if attacking:
+		prefix = "attack_"
+		anim_spr.play(prefix + prev_dir_str)
+	
+	# Handle return to idle
+	if prefix == "idle_":
+		anim_spr.play(prefix + prev_dir_str)
+	
 	# Determine the direction
-	if previous_direction.x > 0:
+	if direction.x > 0:
 		anim_spr.play(prefix + "right")
-	elif previous_direction.x < 0:
+	elif direction.x < 0:
 		anim_spr.play(prefix + "left")
-	elif previous_direction.y > 0:
+	elif direction.y > 0:
 		anim_spr.play(prefix + "down")
-	elif previous_direction.y < 0:
+	elif direction.y < 0:
 		anim_spr.play(prefix + "up")
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if anim_spr.animation.begins_with("attack"):
+		attacking = false
+		_handle_animation()
