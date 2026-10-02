@@ -420,9 +420,8 @@ shape = SubResource("RectangleShape2D_k8ckf")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2063777150]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_8ib2y")
-animation = &"attack_down"
+animation = &"idle_down"
 autoplay = "idle_down"
-frame = 3
 
 [node name="HitBox" type="Area2D" parent="." unique_id=642101191]
 position = Vector2(0, 29)
@@ -430,6 +429,7 @@ metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1392644644]
 shape = SubResource("RectangleShape2D_8ib2y")
+disabled = true
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=1611498757]
 

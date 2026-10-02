@@ -1,12 +1,16 @@
+class_name Player
 extends CharacterBody2D
 
 # Nodes
 @onready var anim_spr: AnimatedSprite2D = $AnimatedSprite2D as AnimatedSprite2D
 @onready var hit_box: Area2D = $HitBox as Area2D
 @onready var hurt_box: Area2D = $HurtBox as Area2D
+@onready var hit_box_collision: CollisionShape2D = $HitBox/CollisionShape2D
+
 
 # Player Data
 const SPEED = 300.0
+var attack_power: int = 1
 var direction: Vector2 = Vector2.DOWN
 
 # Player State
@@ -28,6 +32,7 @@ func _physics_process(delta: float) -> void:
 ## Handles player attacking state
 func _attack() -> void:
 	attacking = true
+	hit_box_collision.disabled = false
 
 
 ## Reads player input and updates velocity to move player
@@ -72,4 +77,5 @@ func _handle_animation() -> void:
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if anim_spr.animation.begins_with("attack"):
 		attacking = false
+		hit_box_collision.disabled = true
 		_handle_animation()

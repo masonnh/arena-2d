@@ -147,10 +147,16 @@ script = ExtResource("1_32o7a")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=190454118]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_8ib2y")
-animation = &"walk_left"
+animation = &"walk_down"
 autoplay = "walk_down"
-frame_progress = 0.9994609
+frame_progress = 0.14545882
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=62605799]
+position = Vector2(-0.5, 7.5)
+shape = SubResource("RectangleShape2D_gbhsq")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=1786669281]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=805401703]
 position = Vector2(-0.5, 7.5)
 shape = SubResource("RectangleShape2D_gbhsq")

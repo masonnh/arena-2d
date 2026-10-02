@@ -15,6 +15,10 @@ func init_mob(health_init: int = 1, attack_power_init: int = 1, speed_init: int 
 	health = health_init
 	attack_power = attack_power_init
 	speed = speed_init
+	
+	var hurtbox = _get_hurtbox_node()
+	if hurtbox:
+		hurtbox.area_entered.connect(_on_hurtbox_area_entered)
 
 
 #################
@@ -74,11 +78,26 @@ func _handle_animation(direction: Vector2) -> void:
 		anim_spr.play(prefix + "up")
 
 
+############
+# Signals
+############
+
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+	var parent
+	if area.get_parent().name == "Player":
+		parent = area.get_parent() as Player
+		if area.name == "HitBox":
+			take_damage(parent.attack_power)
+
+
 ##################
 # Abstract Methods
 ##################
 
-## To be overridden in implementation class.
 ## Gets the AnimatedSprite2D node of a mob implementation
 func _get_anim_spr_node():
+	pass
+
+## Gets the HurtBox node of a mob implementation
+func _get_hurtbox_node():
 	pass
