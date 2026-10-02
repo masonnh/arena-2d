@@ -66,13 +66,25 @@ func _handle_animation() -> void:
 	# Determine the direction
 	if direction.x > 0:
 		anim_spr.play(prefix + "right")
+		_move_hitbox(Vector2(30.0, 0.0), 90.0)
 	elif direction.x < 0:
 		anim_spr.play(prefix + "left")
+		_move_hitbox(Vector2(-30.0, 0.0), 90.0)
 	elif direction.y > 0:
 		anim_spr.play(prefix + "down")
+		_move_hitbox(Vector2(0.0, 30.0), 0.0)
 	elif direction.y < 0:
 		anim_spr.play(prefix + "up")
+		_move_hitbox(Vector2(0.0, -30.0), 0.0)
 
+
+func _move_hitbox(position: Vector2, rotation_degrees: float) -> void:
+	hit_box.position = position
+	hit_box.rotation_degrees = rotation_degrees
+
+##########
+# Signals
+##########
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if anim_spr.animation.begins_with("attack"):

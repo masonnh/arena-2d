@@ -424,7 +424,7 @@ animation = &"idle_down"
 autoplay = "idle_down"
 
 [node name="HitBox" type="Area2D" parent="." unique_id=642101191]
-position = Vector2(0, 29)
+position = Vector2(0, 30)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1392644644]
