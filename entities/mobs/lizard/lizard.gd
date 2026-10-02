@@ -2,15 +2,17 @@ extends MobBaseClass
 
 @onready var anim_spr_2d: AnimatedSprite2D = $AnimatedSprite2D as AnimatedSprite2D
 @onready var hurt_box: Area2D = $HurtBox as Area2D
+@onready var player = get_node("/root/Main/Player") as Player
 
 var direction: Vector2 = Vector2.UP
 
 
 func _ready() -> void:
-	init_mob(1, 1, 100)
+	init_mob(2, 1, 100)
 
 
 func _physics_process(delta: float) -> void:
+	direction = global_position.direction_to(player.global_position)
 	move(direction)
 
 

@@ -78,9 +78,11 @@ func _handle_animation() -> void:
 		_move_hitbox(Vector2(0.0, -30.0), 0.0)
 
 
+## Moves the player's hitbox according to position and rotation
 func _move_hitbox(position: Vector2, rotation_degrees: float) -> void:
 	hit_box.position = position
 	hit_box.rotation_degrees = rotation_degrees
+
 
 ##########
 # Signals

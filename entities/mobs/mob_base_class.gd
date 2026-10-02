@@ -9,7 +9,6 @@ var speed: int = 100
 # Mob state
 var attacking: bool = false
 
-
 ## Called when a mob instance is created to initialize values
 func init_mob(health_init: int = 1, attack_power_init: int = 1, speed_init: int = 200) -> void:
 	health = health_init
@@ -68,9 +67,10 @@ func _handle_animation(direction: Vector2) -> void:
 		anim_spr.play(prefix + prev_dir_str)
 	
 	# Determine the direction
-	if direction.x > 0:
+	var strong_x = abs(direction.x) > abs(direction.y)
+	if direction.x > 0 and strong_x:
 		anim_spr.play(prefix + "right")
-	elif direction.x < 0:
+	elif direction.x < 0 and strong_x:
 		anim_spr.play(prefix + "left")
 	elif direction.y > 0:
 		anim_spr.play(prefix + "down")

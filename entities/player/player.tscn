@@ -411,6 +411,7 @@ animations = [{
 size = Vector2(42, 22)
 
 [node name="Player" type="CharacterBody2D" unique_id=1917956507]
+motion_mode = 1
 script = ExtResource("1_abrql")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=876634742]
