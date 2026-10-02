@@ -24,10 +24,6 @@ region = Rect2(0, 64, 32, 32)
 atlas = ExtResource("2_bls4j")
 region = Rect2(0, 96, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_13wue"]
-atlas = ExtResource("2_bls4j")
-region = Rect2(0, 0, 32, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_wy7bt"]
 atlas = ExtResource("2_bls4j")
 region = Rect2(64, 0, 32, 32)
@@ -43,10 +39,6 @@ region = Rect2(64, 64, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_r633c"]
 atlas = ExtResource("2_bls4j")
 region = Rect2(64, 96, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pacje"]
-atlas = ExtResource("2_bls4j")
-region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2h0qb"]
 atlas = ExtResource("2_bls4j")
@@ -229,9 +221,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_13wue")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_wy7bt")
 }, {
 "duration": 1.0,
@@ -248,9 +237,6 @@ animations = [{
 "speed": 7.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pacje")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2h0qb")
 }, {
@@ -421,6 +407,9 @@ animations = [{
 "speed": 7.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ib2y"]
+size = Vector2(42, 22)
+
 [node name="Player" type="CharacterBody2D" unique_id=1917956507]
 script = ExtResource("1_abrql")
 
@@ -431,7 +420,21 @@ shape = SubResource("RectangleShape2D_k8ckf")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2063777150]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_8ib2y")
-animation = &"attack_up"
+animation = &"attack_down"
 autoplay = "idle_down"
+frame = 3
+
+[node name="HitBox" type="Area2D" parent="." unique_id=642101191]
+position = Vector2(0, 29)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1392644644]
+shape = SubResource("RectangleShape2D_8ib2y")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=1611498757]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1158161915]
+position = Vector2(0, 3.5)
+shape = SubResource("RectangleShape2D_k8ckf")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

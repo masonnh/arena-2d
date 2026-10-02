@@ -1,6 +1,9 @@
 extends CharacterBody2D
 
+# Nodes
 @onready var anim_spr: AnimatedSprite2D = $AnimatedSprite2D as AnimatedSprite2D
+@onready var hit_box: Area2D = $HitBox as Area2D
+@onready var hurt_box: Area2D = $HurtBox as Area2D
 
 # Player Data
 const SPEED = 300.0
