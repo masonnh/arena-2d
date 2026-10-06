@@ -11,6 +11,7 @@ extends CharacterBody2D
 # Player Data
 const SPEED = 300.0
 var attack_power: int = 1
+var health: int = 3
 var direction: Vector2 = Vector2.DOWN
 
 # Player State
@@ -76,6 +77,22 @@ func _handle_animation() -> void:
 	elif direction.y < 0:
 		anim_spr.play(prefix + "up")
 		_move_hitbox(Vector2(0.0, -30.0), 0.0)
+
+
+#################
+# Handle Damage
+#################
+
+## Subtracts mob health by damage_amt
+func take_damage(damage_amt: int) -> void:
+	health -= damage_amt
+	if health <= 0:
+		_die()
+
+
+## Removes mob from scene
+func _die() -> void:
+	queue_free()
 
 
 ## Moves the player's hitbox according to position and rotation

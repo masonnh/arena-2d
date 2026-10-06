@@ -18,6 +18,10 @@ func init_mob(health_init: int = 1, attack_power_init: int = 1, speed_init: int 
 	var hurtbox = _get_hurtbox_node()
 	if hurtbox:
 		hurtbox.area_entered.connect(_on_hurtbox_area_entered)
+	
+	var hitbox = _get_hitbox_node()
+	if hitbox:
+		hitbox.area_entered.connect(_on_hitbox_area_entered)
 
 
 #################
@@ -90,6 +94,13 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 			take_damage(parent.attack_power)
 
 
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	var parent
+	if area.get_parent().name == "Player":
+		parent = area.get_parent() as Player
+		if area.name == "HurtBox":
+			parent.take_damage(attack_power)
+
 ##################
 # Abstract Methods
 ##################
@@ -100,4 +111,8 @@ func _get_anim_spr_node():
 
 ## Gets the HurtBox node of a mob implementation
 func _get_hurtbox_node():
+	pass
+
+## Gets the HitBox node of a mob implementation
+func _get_hitbox_node():
 	pass

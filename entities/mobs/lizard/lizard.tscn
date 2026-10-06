@@ -161,3 +161,12 @@ shape = SubResource("RectangleShape2D_gbhsq")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=805401703]
 position = Vector2(-0.5, 7.5)
 shape = SubResource("RectangleShape2D_gbhsq")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=843411168]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1795521022]
+position = Vector2(-0.5, 7.5)
+shape = SubResource("RectangleShape2D_gbhsq")
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="area_entered" from="HitBox" to="." method="_on_hurt_box_area_entered"]
